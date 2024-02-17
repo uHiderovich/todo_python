@@ -2,13 +2,20 @@ from datetime import datetime
 
 
 class Note:
-    def __init__(self, title, description, date=None):
+    id = 0
+
+    def __init__(self, title, description, note_id=None, date=None):
+        Note.id += 1
+        self.__id = int(note_id) or Note.id
         self.__title = title
         self.__description = description
         self.__date = date or datetime.today().strftime('%d.%m.%Y %H:%M')
 
     def __str__(self):
-        return f"{self.__date}. {self.__title}\n{self.__description}"
+        return f"{self.__id}. {self.__date}. {self.__title}\n{self.__description}"
+
+    def get_id(self):
+        return self.__id
 
     def get_title(self):
         return self.__title
@@ -22,4 +29,4 @@ class Note:
     def update(self, title, description):
         self.__title = title
         self.__description = description
-        self.__date = datetime.today().strftime('%Y-%m-%d-%H:%M')
+        self.__date = datetime.today().strftime('%d.%m.%Y %H:%M')

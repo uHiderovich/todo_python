@@ -5,8 +5,8 @@ class NotesView:
     def print_notes(self, notes):
         print('-------------------')
         print('Список заметок:')
-        for index, note in enumerate(notes, 1):
-            print(f"{index}. {note}")
+        for note in notes:
+            print(f"ID заметки {note.get_id()}. Дата: {note.get_date()}. Заголовок: {note.get_title()}")
         print('-------------------')
 
     def print_menu(self):
@@ -15,8 +15,10 @@ class NotesView:
         print('1. add для добавления заметки')
         print('2. update для обновления заметки')
         print('3. delete для удаления заметки')
-        print('4. show для просмотра всех заметок')
-        print('5. exit для выхода из программы')
+        print('4. show_all для просмотра всех заметок')
+        print('5. show_by_id для просмотра заметки по ее id')
+        print('6. find для поиска по дате')
+        print('7. exit для выхода из программы')
         print('-------------------')
 
     def get_command(self):
@@ -27,11 +29,8 @@ class NotesView:
         description = self.get_note_description()
         return title, description
 
-    def get_note_info_for_delete(self):
-        return int(self.promnt('Введите номер заметки из списка для удаления: '))
-
-    def get_note_info_for_update(self):
-        return int(self.promnt('Введите номер заметки из списка для обновления: '))
+    def get_note_id(self):
+        return int(self.promnt('Введите id заметки: '))
 
     def get_note_title(self, is_update=False):
         help_message = ' (оставьте пустым, если не хотите обновлять)' if is_update else ''
@@ -43,7 +42,8 @@ class NotesView:
 
     def print_selected_note(self, note):
         print('Выбранная заметка: ')
-        print(str(note))
+        print(f"ID заметки {note.get_id()}. Дата: {note.get_date()}. Заголовок: {note.get_title()}")
+        print(note.get_description())
 
     def print_add_success(self):
         print('Заметка успешно добавлена!')
@@ -54,6 +54,9 @@ class NotesView:
     def print_delete_success(self):
         print('Заметка успешно удалена!')
 
+    def print_nothing_to_update(self):
+        print('Нечего обновлять!')
+
     def print_error_add(self, e):
         error_message = e.message
         if not e.title:
@@ -61,6 +64,12 @@ class NotesView:
         if not e.description:
             error_message += '\n' + 'Необходимо заполнить добавть описание"'
         print(error_message)
+
+    def get_date_for_find(self):
+        message = 'Введите дату для поиска в формате в одном из форматов: '
+        format_1 = '\n<день>.<месяц>.<год>'
+        format_2 = '\n<день>.<месяц>.<год> <час>:<минута>\n'
+        return self.promnt(message + format_1 + format_2)
 
     def print_message(self, message):
         print(message)
