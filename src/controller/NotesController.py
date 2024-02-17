@@ -24,7 +24,7 @@ class NotesController:
             elif command == 'delete':
                 self.delete_note()
             elif command == 'show_all':
-                self.show_notes()
+                self.show_all()
             elif command == 'show_by_id':
                 self.show_note_by_id()
             elif command == 'find':
