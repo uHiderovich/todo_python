@@ -2,6 +2,13 @@ from datetime import datetime
 
 
 class Note:
+    """
+    Класс представляющий собой заметку.
+    :param title: заголовок заметки
+    :param description: текст заметки
+    :param note_id: идентификатор заметки
+    :param date: дата создания заметки
+    """
     id = 0
 
     def __init__(self, title, description, note_id=None, date=None):
@@ -27,6 +34,11 @@ class Note:
         return self.__date
 
     def update(self, title, description):
+        """
+        Метод обновления заметки.
+        :param title: новый заголовок
+        :param description: новый текст
+        """
         self.__title = title
         self.__description = description
         self.__date = datetime.today().strftime('%d.%m.%Y %H:%M')

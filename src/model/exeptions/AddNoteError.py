@@ -1,4 +1,4 @@
-class AddNoteException(Exception):
+class AddNoteError(Exception):
     def __init__(self, message, title, description):
         super().__init__(message)
         self.message = message

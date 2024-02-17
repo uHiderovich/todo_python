@@ -71,11 +71,17 @@ class NotesView:
         format_2 = '\n<день>.<месяц>.<год> <час>:<минута>\n'
         return self.promnt(message + format_1 + format_2)
 
-    def print_message(self, message):
-        print(message)
+    def print_error_id(self):
+        print('Неверный формат id')
+
+    def print_notes_not_found(self):
+        print('Заметки не найдены')
 
     def print_exit(self):
         print('Выход из программы')
+
+    def print_message(self, message):
+        print(message)
 
     def promnt(self, message):
         return input(message)
